@@ -11,7 +11,7 @@ A multi-screen wellness tracker built with **Expo**, **React Navigation**, **Zus
 </p>
 
 <p align="center">
-  <img src="assets/screenshots/dark-mode.png" width="250" />
+  <img src="assets/screenshots/darkmode.png" width="250" />
 </p>
 
 ## Features

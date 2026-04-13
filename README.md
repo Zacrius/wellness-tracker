@@ -2,6 +2,18 @@
 
 A multi-screen wellness tracker built with **Expo**, **React Navigation**, **Zustand** (local app state), **AsyncStorage** (persistence), and a **GraphQL** “Health Tips” API (mock Apollo Server) consumed via **TanStack React Query** with caching + pagination.
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="assets/screenshots/dashboard.png" width="250" />
+  <img src="assets/screenshots/history.png" width="250" />
+  <img src="assets/screenshots/entry.png" width="250" />
+</p>
+
+<p align="center">
+  <img src="assets/screenshots/dark-mode.png" width="250" />
+</p>
+
 ## Features
 
 - **Navigation**
@@ -21,7 +33,7 @@ A multi-screen wellness tracker built with **Expo**, **React Navigation**, **Zus
 
 - **External API (GraphQL)**
   - Health tips served from a local **Apollo GraphQL** server (`server/`)
-  - React Query **infinite pagination** (Load More)
+  - React Query infinite query with page-based GraphQL pagination
   - **Caching** via `staleTime`
   - Loading + error states with retry
   - Pull-to-refresh on list-based screens
@@ -149,7 +161,47 @@ npx uri-scheme open "wellness://entry/123" --ios
 - **TypeScript**
   - Strict mode enabled in `tsconfig.json`
 
+  ## 🧠 Architecture Decisions
+
+- **Zustand for global state**
+  Chosen for its simplicity and minimal boilerplate compared to Redux. It provides a clean API for managing local app state (entries) without unnecessary complexity.
+
+- **React Query for server state**
+  Used to handle asynchronous GraphQL data (health tips), including caching, pagination, and loading/error states. This avoids manual state handling and improves performance.
+
+- **React Hook Form + Yup**
+  Provides efficient form state management with minimal re-renders, combined with schema-based validation for better maintainability.
+
+- **NativeWind (Tailwind)**
+  Enables rapid UI development with consistent styling and built-in dark mode support, improving development speed and maintainability.
+
+- **Separation of concerns**
+  - `store/` → app state
+  - `services/` → API + persistence
+  - `screens/` → UI logic
+
+## ⚖️ Trade-offs & Limitations
+
+- The GraphQL API is a local mock server instead of a real backend
+- Data is stored locally via AsyncStorage (no cloud sync or multi-device support)
+- No authentication or user accounts implemented
+- UI animations and micro-interactions are minimal due to time constraints
+
+## 🤔 Assumptions
+
+- The app is intended for single-user usage
+- Persistent storage is local-only
+- Health tips API is simulated and does not require authentication
+- The focus is on functionality and architecture rather than production-level UI polish
+
+## 🛠 Future Improvements
+
+- Add user authentication and cloud sync
+- Replace mock GraphQL API with a real backend service
+- Improve UI/UX with animations and transitions
+- Add charts/visualizations for health trends
+- Offline-first enhancements and sync strategies
+
 ## Notes
 
 - `server/.env` is intentionally ignored from git. If you need it, create your own locally.
-
